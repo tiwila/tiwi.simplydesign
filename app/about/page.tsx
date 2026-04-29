@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export default function AboutPage() {
-  const aboutProfileImage = "/api/local-image?key=about";
+  const aboutProfileImage = "/images/about.jpg";
 
   return (
     <article className="space-y-10">
