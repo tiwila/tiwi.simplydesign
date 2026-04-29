@@ -84,7 +84,7 @@ export default function AboutPage() {
           </li>
         </ul>
         <a
-          href="/api/resume"
+          href="https://drive.google.com/file/d/1EZM08eVmfao7VF_5HlMblsioipxTRwlT/view?usp=drive_link"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center rounded-full border border-accent px-5 py-2 font-sans text-[13px] font-medium uppercase tracking-[0.08em] text-accent transition-colors duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:bg-accent hover:text-white"
