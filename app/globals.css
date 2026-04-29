@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #faf8f5;
+  --color-ink: #1c1a17;
+  --color-ink-muted: #5f5874;
+  --color-rule: #d4cae8;
+  --color-accent: #7c6fa0;
+  --color-accent-light: #e9defb;
+  --color-accent-dark: #463b63;
+  --color-warm-yellow: #f5e6c8;
+  --color-terracotta: #c4714a;
+  --color-sage: #7a9e87;
+  --color-cream-deep: #ede5d8;
+  --texture-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%231C1A17' fill-opacity='0.08'%3E%3Ccircle cx='8' cy='7' r='1'/%3E%3Ccircle cx='44' cy='18' r='1'/%3E%3Ccircle cx='92' cy='11' r='1'/%3E%3Ccircle cx='121' cy='31' r='1'/%3E%3Ccircle cx='25' cy='52' r='1'/%3E%3Ccircle cx='73' cy='49' r='1'/%3E%3Ccircle cx='112' cy='64' r='1'/%3E%3Ccircle cx='37' cy='81' r='1'/%3E%3Ccircle cx='86' cy='88' r='1'/%3E%3Ccircle cx='129' cy='95' r='1'/%3E%3Ccircle cx='16' cy='113' r='1'/%3E%3Ccircle cx='58' cy='124' r='1'/%3E%3Ccircle cx='103' cy='118' r='1'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+::selection {
+  background: #d9cff2;
+}
+
+a {
+  color: var(--color-accent-dark);
+  text-decoration: none;
+  transition: color 200ms ease, text-decoration-color 200ms ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-dark);
+}
+
+hr {
+  border: 0;
+  border-top: 0.5px solid rgba(124, 111, 160, 0.35);
+}
+
+.hero-line {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.hero-line--in {
+  animation: hero-in 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes hero-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--color-accent-dark);
+  transition: opacity 120ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-line--in {
+    animation: none;
+  }
+
+  .hero-cursor {
+    opacity: 1;
+    transition: none;
+  }
+}
+
