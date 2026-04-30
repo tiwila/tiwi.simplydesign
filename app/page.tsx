@@ -12,8 +12,13 @@ export default async function HomePage() {
       <DictionaryHero />
 
       <section>
-        <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
-          selected work
+        <div className="flex items-baseline justify-between gap-4">
+          <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+            selected work
+          </div>
+          <Link href="/work" className="font-sans text-[12px] font-medium uppercase tracking-[0.1em] text-accent">
+            View all work →
+          </Link>
         </div>
         <div className="mt-6 space-y-4">
           {featured.map((c) => (
@@ -29,11 +34,6 @@ export default async function HomePage() {
               accentColor={c.accentColor}
             />
           ))}
-        </div>
-        <div className="mt-6">
-          <Link href="/work" className="font-sans text-[14px] text-accent">
-            View all work →
-          </Link>
         </div>
       </section>
     </div>

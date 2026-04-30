@@ -6,11 +6,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 type SeeAlsoLink = { href: string; label: string };
 
 export function DictionaryHero({
-  seeAlso = [
-    { href: "/work", label: "work" },
-    { href: "/about", label: "about" },
-    { href: "#footer", label: "contact" }
-  ]
+  seeAlso = []
 }: {
   seeAlso?: SeeAlsoLink[];
 }) {
@@ -91,7 +87,7 @@ export function DictionaryHero({
         className={`${lineClass} flex flex-wrap items-baseline gap-x-2 gap-y-2 font-sans text-[12px] font-medium uppercase tracking-[0.1em] text-ink-muted`}
         style={delayStyle("240ms")}
       >
-        <span>See also:</span>
+        {seeAlso.length ? <span>See also:</span> : null}
         {seeAlso.map((l, idx) => {
           const isExternal = l.href.startsWith("http") || l.href.startsWith("mailto:");
           const LinkEl = (

@@ -9,7 +9,7 @@ export function Footer() {
             className="text-[14px] font-medium text-ink"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            Tiwi Lanre-Adisa
+            Let&apos;s work together
           </div>
 
           <div className="flex gap-4 md:justify-center">

@@ -21,6 +21,7 @@ export type CaseStudy = {
   tags: string[];
   toolStack?: string[];
   liveSiteUrl?: string;
+  slideDeckUrl?: string;
   phase1Body?: string;
   phase1Challenge?: string;
   phase2Body?: string;
@@ -137,6 +138,10 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy> {
     liveSiteUrl:
       typeof data.liveSiteUrl === "string" && data.liveSiteUrl.trim().length > 0
         ? data.liveSiteUrl
+        : undefined,
+    slideDeckUrl:
+      typeof data.slideDeckUrl === "string" && data.slideDeckUrl.trim().length > 0
+        ? data.slideDeckUrl
         : undefined,
     phase1Body: typeof data.phase1Body === "string" ? data.phase1Body : undefined,
     phase1Challenge: typeof data.phase1Challenge === "string" ? data.phase1Challenge : undefined,

@@ -44,6 +44,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const related =
     cs.relatedSlug && cs.relatedSlug !== cs.slug ? await safeGetCaseStudy(cs.relatedSlug) : null;
   const isTheraLink = cs.slug === "theralink-teletherapy-platform";
+  const isMosm = cs.slug === "mosm-origin-designathon";
   const accentTextClass =
     cs.accentColor === "terracotta"
       ? "text-terracotta"
@@ -326,6 +327,60 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </div>
               <h3 className="font-sans text-[15px] font-semibold text-ink">{decision.label}</h3>
               <p>{decision.body}</p>
+
+              {isMosm && idx === 0 ? (
+                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                  <figure className="space-y-2">
+                    <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                      <div className="relative aspect-[16/10]">
+                        <Image
+                          src="/images/mosm-brand-positioning.png"
+                          alt="MOSM brand positioning"
+                          fill
+                          className="object-contain p-2"
+                        />
+                      </div>
+                    </div>
+                    <figcaption className="font-sans text-[12px] italic text-ink-muted">
+                      Brand positioning
+                    </figcaption>
+                  </figure>
+
+                  <figure className="space-y-2">
+                    <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                      <div className="relative aspect-[16/10]">
+                        <Image
+                          src="/images/mosm-brand-pillars.png"
+                          alt="MOSM brand pillars"
+                          fill
+                          className="object-contain p-2"
+                        />
+                      </div>
+                    </div>
+                    <figcaption className="font-sans text-[12px] italic text-ink-muted">
+                      Brand pillars
+                    </figcaption>
+                  </figure>
+                </div>
+              ) : null}
+
+              {isMosm && idx === 1 ? (
+                <figure className="mt-5 space-y-2">
+                  <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                    <div className="relative aspect-[16/9]">
+                      <Image
+                        src="/images/mosm-logo-concepts.png"
+                        alt="MOSM logo concepts"
+                        fill
+                        className="object-contain p-2"
+                      />
+                    </div>
+                  </div>
+                  <figcaption className="font-sans text-[12px] italic text-ink-muted">
+                    Logo concepts explored
+                  </figcaption>
+                </figure>
+              ) : null}
             </div>
           ))}
 
@@ -437,6 +492,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 Open full prototype in Figma →
               </a>
             ) : null}
+          </div>
+        </CaseStudySection>
+      ) : null}
+
+      {cs.slideDeckUrl ? (
+        <CaseStudySection beat="visuals">
+          <div className="space-y-3">
+            <p>You can also explore the slide deck used to present the system.</p>
+            <a
+              href={cs.slideDeckUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={`inline-block font-sans text-[12px] font-medium uppercase tracking-[0.1em] ${ctaTextClass}`}
+            >
+              Open slide deck (PDF) →
+            </a>
           </div>
         </CaseStudySection>
       ) : null}
