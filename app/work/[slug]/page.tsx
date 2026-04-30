@@ -45,6 +45,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     cs.relatedSlug && cs.relatedSlug !== cs.slug ? await safeGetCaseStudy(cs.relatedSlug) : null;
   const isTheraLink = cs.slug === "theralink-teletherapy-platform";
   const isMosm = cs.slug === "mosm-origin-designathon";
+  const isMidnightRun = cs.slug === "midnight-run-cafe-research";
   const accentTextClass =
     cs.accentColor === "terracotta"
       ? "text-terracotta"
@@ -67,6 +68,332 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     cs.accentColor === "terracotta" ? "text-terracotta" : isTheraLink ? "text-sage" : "text-accent";
   const whyMomentAccent =
     cs.accentColor === "terracotta" ? "terracotta" : isTheraLink ? "sage" : "accent";
+
+  if (isMidnightRun) {
+    const deckUrl = cs.slideDeckUrl ?? "/decks/midnight-run-research-deck.pdf";
+
+    return (
+      <article className="space-y-12">
+        <div className="flex items-center justify-between gap-4">
+          <Link href="/work" className="font-sans text-[13px] font-medium text-ink-muted hover:text-ink">
+            ← Work
+          </Link>
+          <a
+            href={deckUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-accent underline decoration-dotted underline-offset-[3px]"
+            style={{ textDecorationThickness: "0.5px" }}
+          >
+            Open research deck (PDF) →
+          </a>
+        </div>
+
+        <header className="space-y-5">
+          <div className="space-y-2">
+            <h1 className="font-serif text-[48px] font-bold leading-[1.08] text-ink">{cs.title}</h1>
+            <div className="font-serif text-[20px] italic leading-[1.4] text-ink-muted">{cs.description}</div>
+          </div>
+
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+            {cs.tags.map((tag, idx) => (
+              <span key={tag} className="inline-flex items-center gap-2">
+                <span>{tag}</span>
+                {idx < cs.tags.length - 1 ? <span className="text-ink-muted">·</span> : null}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        {cs.heroImage ? (
+          <div className="relative w-full overflow-hidden rounded-sm bg-bg">
+            <div className="relative aspect-[16/8]">
+              <Image src={cs.heroImage} alt={`${cs.title} hero`} fill className="object-cover" />
+              <div className="absolute inset-0 bg-ink/35" aria-hidden="true" />
+            </div>
+          </div>
+        ) : null}
+
+        <section className="grid gap-4 md:grid-cols-4">
+          <InfoPill label="Year" value={cs.year || "2026"} />
+          <InfoPill label="Context" value={cs.context} />
+          <InfoPill label="My role" value={cs.role} />
+          <InfoPill label="Status" value="Research complete · Redesign in progress · Proposal pending" />
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="font-serif text-[28px] leading-[1.2] text-ink">The research problem</h2>
+          <div className="space-y-3 font-sans text-[16px] leading-[1.7] text-ink">
+            <p>Midnight Run is a strong local brand with a weak digital front door. The site didn’t help people decide whether to visit.</p>
+            <ul className="ml-5 list-disc space-y-1 text-ink-muted">
+              <li>Menu and pricing were hard to find (or mislabeled).</li>
+              <li>Hours weren’t surfaced at the decision point.</li>
+              <li>The site didn’t communicate “study-friendly” signals (Wi‑Fi, outlets, noise, seating).</li>
+            </ul>
+            <div className="rounded-sm border border-rule bg-cream-deep/35 px-5 py-4">
+              <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">research question</div>
+              <div className="mt-2 font-serif text-[18px] leading-[1.6] text-ink">
+                What usability and information gaps prevent the website from supporting visit decision‑making — and what design changes would address them?
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <div className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-ink-muted">
+            the why moment
+          </div>
+          <div
+            className="relative overflow-hidden rounded-sm px-7 py-6"
+            style={{
+              backgroundImage: "var(--texture-noise), linear-gradient(rgba(26,26,26,0.04), rgba(26,26,26,0.04))",
+              backgroundSize: "140px 140px, 100% 100%"
+            }}
+          >
+            <div className="font-serif text-[19px] leading-[1.65] text-ink">
+              The “aha” wasn’t that the site looked dated — it was that the gaps read as unreliability. Blank states,
+              mislabeled navigation, and unhelpful search didn’t just slow users down; they made people question whether
+              the café would be open, worth the trip, or good for studying. Once we framed the goal as “reduce
+              uncertainty fast,” the redesign priorities became inevitable.
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="font-serif text-[28px] leading-[1.2] text-ink">Research plan</h2>
+          <div className="space-y-3 font-sans text-[16px] leading-[1.7] text-ink">
+            <p>
+              We didn’t rely on a single method. The plan was multi-method on purpose — so patterns that appeared across
+              expert review and real user behavior could be treated as findings, not opinions.
+            </p>
+            <p className="text-ink-muted">
+              The artifacts below (journey map + usability metrics) are included because they show the same story from
+              different angles: uncertainty compounds when the website can’t confirm basic visit decisions.
+            </p>
+          </div>
+
+          <InlineImage
+            src="/images/mrc-user-journey-map.png"
+            alt="User journey map for Jordan Morales"
+            caption="User journey map: uncertainty compounds across awareness → consideration → acquisition."
+            aspect="16/8"
+          />
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <MethodCard
+              title="Heuristic evaluation"
+              subtitle="Nielsen’s 10 heuristics"
+              bullets={[
+                "Find violations early (before user testing).",
+                "Turn issues into testable hypotheses for sessions."
+              ]}
+            />
+            <MethodCard
+              title="User surveys"
+              subtitle="Quantitative feedback"
+              bullets={[
+                "Identify trends and common expectations quickly.",
+                "Add numbers to support interview themes."
+              ]}
+            />
+            <MethodCard
+              title="User interviews"
+              subtitle="Decision-making context"
+              bullets={[
+                "Understand why people choose a café before they arrive.",
+                "Validate what information reduces uncertainty fastest."
+              ]}
+            />
+            <MethodCard
+              title="Usability testing"
+              subtitle="4 participants · 7 tasks"
+              bullets={[
+                "Observe real failures (menu, hours, search, suitability).",
+                "Quantify breakdowns so fixes are non-negotiable."
+              ]}
+            />
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="font-serif text-[28px] leading-[1.2] text-ink">Competitive analysis findings</h2>
+          <div className="grid gap-4 md:grid-cols-[1fr_280px] md:items-start">
+            <div className="space-y-3 font-sans text-[16px] leading-[1.7] text-ink">
+              <p>
+                We benchmarked Midnight Run against two well-performing local venues — Abe Erb Brewing and Eclipse Cafe —
+                to ground recommendations in real market expectations (not just preference).
+              </p>
+              <ul className="ml-5 list-disc space-y-1 text-ink-muted">
+                <li>
+                  <span className="text-ink">Eclipse Cafe:</span> structured, categorized menu that helps users decide before arriving.
+                </li>
+                <li>
+                  <span className="text-ink">Abe Erb:</span> events are visible and discoverable (calendar-style), supporting planning.
+                </li>
+                <li>
+                  <span className="text-ink">Both:</span> clear navigation labels and key info reachable in one click.
+                </li>
+              </ul>
+              <p className="text-ink-muted">
+                The gap wasn’t about visual design. It was information architecture: Midnight Run had the vibe — but not the structure.
+              </p>
+            </div>
+            <InlineImage
+              src="/images/mrc-competitive-analysis.png"
+              alt="Competitive analysis reference brands: Abe Erb and Eclipse Cafe"
+              caption="Competitive benchmarks used to set expectations."
+            />
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="font-serif text-[28px] leading-[1.2] text-ink">Heuristic evaluation (3 severe violations)</h2>
+          <div className="grid gap-4 md:grid-cols-3">
+            <FindingCard
+              title="Visibility of system status"
+              detail="Products page showed “0 products” with no explanation."
+            />
+            <FindingCard
+              title="Match with the real world"
+              detail="Search behaved like e‑commerce, not a café (irrelevant results)."
+            />
+            <FindingCard
+              title="Lack of content & clarity"
+              detail="Homepage relied on a single image and didn’t surface essentials like menu, hours, or offerings."
+            />
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            <InlineImage
+              src="/images/mrc-0-products.png"
+              alt="Products page shows 0 products with no explanation"
+              caption="Visibility of system status: “0 products” with no explanation."
+            />
+            <InlineImage
+              src="/images/mrc-mismatch.png"
+              alt="Search results mismatch for café-related terms"
+              caption="Match with the real world: search behaves like e‑commerce, not a café."
+            />
+            <InlineImage
+              src="/images/mrc-heuristic-homepage.png"
+              alt="Homepage shows a single image and newsletter signup"
+              caption="Lack of content & clarity: clean design, but missing key info to make a decision."
+            />
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="font-serif text-[28px] leading-[1.2] text-ink">Usability testing — key insights</h2>
+          <div className="space-y-3 font-sans text-[16px] leading-[1.7] text-ink">
+            <p>
+              We ran task-based usability testing with 4 participants across 7 visit-decisions. The data made the story hard to ignore:
+              5 out of 7 tasks had a 0% success rate, and even the tasks people completed were described as effortful.
+            </p>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-3">
+            <InsightCard
+              title="People couldn’t confirm basics"
+              detail="Menu, hours, and “is this a good study spot?” weren’t answerable quickly — which stalled the visit decision."
+              stat="0% success on key tasks"
+            />
+            <InsightCard
+              title="Search didn’t match intent"
+              detail="Search results behaved like product shopping, not café discovery — creating confusion instead of reassurance."
+              stat="Highest errors on search"
+            />
+            <InsightCard
+              title="Uncertainty compounds"
+              detail="Every stage (awareness → consideration → acquisition) introduced more doubt, leading to abandonment instead of commitment."
+              stat="Journey map pattern"
+            />
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <InlineImage
+              src="/images/mrc-usability-task-success.png"
+              alt="Usability task success rates table"
+              caption="Task success rates across 7 visit-decisions."
+              aspect="16/9"
+            />
+            <InlineImage
+              src="/images/mrc-usability-error-rate.png"
+              alt="Usability error rate table"
+              caption="Error rates by task (including severity)."
+              aspect="16/9"
+            />
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="font-serif text-[28px] leading-[1.2] text-ink">Design recommendations</h2>
+          <div className="grid gap-4 lg:grid-cols-3">
+            <InsightToRec
+              insight="Improve content clarity"
+              rec={[
+                "Rename “Products” → “Menu” to match expectations.",
+                "Add clear menu, hours, and café offerings above the fold.",
+                "Include events + study/work information."
+              ]}
+            />
+            <InsightToRec
+              insight="Improve navigation & structure"
+              rec={[
+                "Simplify navigation with clear labels.",
+                "Reduce reliance on scrolling (above-the-fold mentality).",
+                "Improve page hierarchy and organization."
+              ]}
+            />
+            <InsightToRec
+              insight="Improve feedback & user confidence"
+              rec={[
+                "Add empty states like “Coming soon” for blank pages.",
+                "Provide feedback for search results and navigation actions.",
+                "Improve perceived completeness to build trust."
+              ]}
+            />
+          </div>
+        </section>
+
+        <section className="grid gap-6 lg:grid-cols-2">
+          <section className="space-y-3 rounded-sm border border-rule bg-cream-deep/35 px-6 py-6">
+            <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+              what broke
+            </div>
+            <ul className="ml-5 list-disc space-y-2 font-sans text-[16px] leading-[1.7] text-ink">
+              <li>
+                Participant diversity: most participants were students. A second round with non‑student users would strengthen generalizability.
+              </li>
+              <li>
+                Competitive timing: doing competitive analysis in parallel with the heuristic review would have exposed the “Products vs Menu” issue earlier.
+              </li>
+            </ul>
+          </section>
+
+          <section className="space-y-3 rounded-sm border border-rule bg-accent-light/35 px-6 py-6">
+            <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+              what’s next
+            </div>
+            <div className="space-y-2 font-sans text-[16px] leading-[1.7] text-ink">
+              <p>
+                We’re designing the redesign based on these recommendations with the intent to pitch it directly to Midnight Run Cafe.
+              </p>
+              <p className="text-ink-muted">
+                If accepted, this becomes a live implementation case study — and this page will be updated.
+              </p>
+            </div>
+          </section>
+        </section>
+
+        <hr />
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div />
+          <Link href="/work" className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-accent">
+            All work →
+          </Link>
+        </div>
+      </article>
+    );
+  }
 
   if (cs.slug === "moro-app-redesign") {
     const phaseLabelTextClass = "text-accent";
@@ -596,6 +923,133 @@ async function safeGetCaseStudy(slug: string) {
 function toFigmaEmbedUrl(url: string) {
   if (url.includes("figma.com/embed?")) return url;
   return `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(url)}`;
+}
+
+function InfoPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-sm border border-rule bg-bg px-4 py-3">
+      <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">{label}</div>
+      <div className="mt-1 font-sans text-[14px] leading-[1.5] text-ink">{value}</div>
+    </div>
+  );
+}
+
+function MethodCard({
+  title,
+  subtitle,
+  bullets,
+  children
+}: {
+  title: string;
+  subtitle: string;
+  bullets: string[];
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-sm border border-rule bg-bg px-5 py-5">
+      <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">{subtitle}</div>
+      <div className="mt-2 font-serif text-[20px] leading-[1.2] text-ink">{title}</div>
+      <ul className="mt-3 ml-5 list-disc space-y-1 font-sans text-[15px] leading-[1.65] text-ink-muted">
+        {bullets.map((b) => (
+          <li key={b}>{b}</li>
+        ))}
+      </ul>
+      {children}
+    </div>
+  );
+}
+
+function FindingCard({ title, detail }: { title: string; detail: string }) {
+  return (
+    <div className="rounded-sm border border-rule bg-cream-deep/35 px-5 py-5">
+      <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">violation</div>
+      <div className="mt-2 font-sans text-[15px] font-semibold text-ink">{title}</div>
+      <div className="mt-2 font-sans text-[15px] leading-[1.65] text-ink-muted">{detail}</div>
+    </div>
+  );
+}
+
+function InsightToRec({ insight, rec }: { insight: string; rec: string[] }) {
+  return (
+    <div className="rounded-sm border border-rule bg-bg px-5 py-5">
+      <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">insight</div>
+      <div className="mt-2 font-serif text-[18px] leading-[1.55] text-ink">{insight}</div>
+      <div className="mt-4 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+        recommendation
+      </div>
+      <ul className="mt-2 ml-5 list-disc space-y-1 font-sans text-[15px] leading-[1.65] text-ink-muted">
+        {rec.map((r) => (
+          <li key={r}>{r}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function InsightCard({ title, detail, stat }: { title: string; detail: string; stat?: string }) {
+  return (
+    <div className="rounded-sm border border-rule bg-cream-deep/35 px-5 py-5">
+      <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">key insight</div>
+      <div className="mt-2 font-sans text-[15px] font-semibold text-ink">{title}</div>
+      <div className="mt-2 font-sans text-[15px] leading-[1.65] text-ink-muted">{detail}</div>
+      {stat ? (
+        <div className="mt-4 inline-flex rounded-sm border border-rule bg-bg px-3 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+          {stat}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function PdfSlide({ title, src, page }: { title: string; src: string; page: number }) {
+  const url = `${src}#page=${page}&view=FitH`;
+  return (
+    <figure className="space-y-2">
+      <div className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">{title}</div>
+      <div className="overflow-hidden rounded-sm bg-bg">
+        <div className="aspect-[4/3] w-full">
+          <iframe
+            src={url}
+            className="h-full w-full"
+            title={`${title} (page ${page})`}
+            loading="lazy"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+          />
+        </div>
+      </div>
+    </figure>
+  );
+}
+
+function InlineImage({
+  src,
+  alt,
+  caption,
+  aspect = "4/3"
+}: {
+  src: string;
+  alt: string;
+  caption?: string;
+  aspect?: "4/3" | "16/9" | "16/10" | "16/8";
+}) {
+  const aspectClass =
+    aspect === "16/9"
+      ? "aspect-[16/9]"
+      : aspect === "16/10"
+        ? "aspect-[16/10]"
+        : aspect === "16/8"
+          ? "aspect-[16/8]"
+          : "aspect-[4/3]";
+  return (
+    <figure className="space-y-2">
+      <div className="overflow-hidden rounded-sm bg-bg">
+        <div className={`relative ${aspectClass}`}>
+          <Image src={src} alt={alt} fill className="object-contain bg-bg p-2" />
+        </div>
+      </div>
+      {caption ? <figcaption className="font-sans text-[12px] italic text-ink-muted">{caption}</figcaption> : null}
+    </figure>
+  );
 }
 
 function PhaseSection({
