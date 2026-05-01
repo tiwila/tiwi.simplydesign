@@ -7,6 +7,7 @@ import { CaseStudyOutcome } from "@/components/CaseStudyOutcome";
 import { CaseStudySection } from "@/components/CaseStudySection";
 import { PullQuote } from "@/components/PullQuote";
 import { WhyMoment } from "@/components/WhyMoment";
+import { FigmaEmbed } from "@/components/FigmaEmbed";
 import { getAllCaseStudies, getCaseStudy } from "@/lib/work";
 
 export async function generateStaticParams() {
@@ -95,7 +96,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <div className="font-serif text-[20px] italic leading-[1.4] text-ink-muted">{cs.description}</div>
           </div>
 
-          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+          <div className={`flex flex-wrap items-baseline gap-x-2 gap-y-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] ${accentTextClass}`}>
             {cs.tags.map((tag, idx) => (
               <span key={tag} className="inline-flex items-center gap-2">
                 <span>{tag}</span>
@@ -114,12 +115,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         ) : null}
 
-        <section className="grid gap-4 md:grid-cols-4">
-          <InfoPill label="Year" value={cs.year || "2026"} />
-          <InfoPill label="Context" value={cs.context} />
-          <InfoPill label="My role" value={cs.role} />
-          <InfoPill label="Status" value="Research complete · Redesign in progress · Proposal pending" />
-        </section>
+        <hr />
+
+        <CaseStudyContext role={cs.role} context={cs.context} timeline={cs.timeline} brief={cs.brief} />
 
         <section className="space-y-6">
           <h2 className="font-serif text-[28px] leading-[1.2] text-ink">The research problem</h2>
@@ -139,25 +137,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </section>
 
-        <section className="space-y-4">
-          <div className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-ink-muted">
-            the why moment
-          </div>
-          <div
-            className="relative overflow-hidden rounded-sm px-7 py-6"
-            style={{
-              backgroundImage: "var(--texture-noise), linear-gradient(rgba(26,26,26,0.04), rgba(26,26,26,0.04))",
-              backgroundSize: "140px 140px, 100% 100%"
-            }}
-          >
-            <div className="font-serif text-[19px] leading-[1.65] text-ink">
-              The “aha” wasn’t that the site looked dated — it was that the gaps read as unreliability. Blank states,
-              mislabeled navigation, and unhelpful search didn’t just slow users down; they made people question whether
-              the café would be open, worth the trip, or good for studying. Once we framed the goal as “reduce
-              uncertainty fast,” the redesign priorities became inevitable.
-            </div>
-          </div>
-        </section>
+        <WhyMoment accentColor="sage">{cs.sections.whyMoment}</WhyMoment>
 
         <section className="space-y-6">
           <h2 className="font-serif text-[28px] leading-[1.2] text-ink">Research plan</h2>
@@ -386,8 +366,21 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
         <hr />
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div />
-          <Link href="/work" className="font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-accent">
+          {related ? (
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+              <span>See also:</span>
+              <Link
+                href={`/work/${related.slug}`}
+                className={`${ctaTextClass} underline decoration-dotted underline-offset-[3px]`}
+                style={{ textDecorationThickness: "0.5px" }}
+              >
+                {related.title}
+              </Link>
+            </div>
+          ) : (
+            <div />
+          )}
+          <Link href="/work" className={`font-sans text-[11px] font-medium uppercase tracking-[0.1em] ${ctaTextClass}`}>
             All work →
           </Link>
         </div>
@@ -410,11 +403,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <h1 className={`font-serif text-[48px] font-bold leading-[1.08] ${headerTextClass}`}>{cs.title}</h1>
           <div className="font-serif text-[20px] italic leading-[1.4] text-ink-muted">{cs.description}</div>
           {cs.toolStack?.length ? (
-            <div className="flex flex-wrap gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+            <div className="flex flex-wrap gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-accent">
               {cs.toolStack.map((tool) => (
                 <span
                   key={tool}
-                  className="rounded-sm border border-rule bg-cream-deep/35 px-2 py-1 text-ink-muted"
+                  className="rounded-sm border border-rule bg-cream-deep/35 px-2 py-1 text-accent"
                 >
                   {tool}
                 </span>
@@ -714,24 +707,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           {cs.lofiPrototypeUrl ? (
             <div className="space-y-2">
               <h3 className="font-sans text-[14px] font-semibold text-ink">Lo-Fi Prototype</h3>
-              <figure className="space-y-2">
-                <div className="relative w-full overflow-hidden rounded-sm border border-rule bg-bg">
-                  <div className="aspect-[16/10] w-full">
-                    <iframe
-                      src={toFigmaEmbedUrl(cs.lofiPrototypeUrl)}
-                      className="h-full w-full"
-                      allowFullScreen
-                      loading="lazy"
-                      sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-downloads"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      title={`${cs.title} Lo-Fi Figma prototype`}
-                    />
-                  </div>
-                </div>
-                <figcaption className="font-sans text-[12px] italic text-ink-muted">
-                  Lo-fi prototype — guided matching flow, round 1 testing
-                </figcaption>
-              </figure>
+              <FigmaEmbed
+                embedSrc={toFigmaEmbedUrl(cs.lofiPrototypeUrl)}
+                openUrl={cs.lofiPrototypeUrl}
+                title={`${cs.title} Lo-Fi Figma prototype`}
+                label="Load lo-fi prototype"
+                aspect="16/10"
+              />
+              <figcaption className="font-sans text-[12px] italic text-ink-muted">
+                Lo-fi prototype — guided matching flow, round 1 testing
+              </figcaption>
             </div>
           ) : null}
         </div>
@@ -795,19 +780,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="space-y-3">
             <p>Explore the final interactive prototype directly in this case study.</p>
             {cs.finalPrototypeUrl || cs.prototypeUrl ? (
-              <div className="relative w-full overflow-hidden rounded-sm border border-rule bg-bg">
-                <div className="aspect-[16/10] w-full">
-                  <iframe
-                    src={toFigmaEmbedUrl(cs.finalPrototypeUrl ?? cs.prototypeUrl ?? "")}
-                    className="h-full w-full"
-                    allowFullScreen
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-downloads"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    title={`${cs.title} Final Figma prototype`}
-                  />
-                </div>
-              </div>
+              <FigmaEmbed
+                embedSrc={toFigmaEmbedUrl(cs.finalPrototypeUrl ?? cs.prototypeUrl ?? "")}
+                openUrl={cs.finalPrototypeUrl ?? cs.prototypeUrl ?? ""}
+                title={`${cs.title} Final Figma prototype`}
+                label="Load prototype"
+                aspect="16/10"
+              />
             ) : null}
             {cs.finalPrototypeUrl || cs.prototypeUrl ? (
               <a
@@ -849,19 +828,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             high fidelity designs
           </div>
           <figure className="space-y-3">
-            <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
-              <div className="aspect-[16/10] w-full">
-                <iframe
-                  src={toFigmaEmbedUrl(cs.finalPrototypeUrl ?? cs.highFidelityCtaUrl ?? "")}
-                  className="h-full w-full"
-                  allowFullScreen
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-downloads"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title={`${cs.title} High-Fidelity Figma prototype`}
-                />
-              </div>
-            </div>
+            <FigmaEmbed
+              embedSrc={toFigmaEmbedUrl(cs.finalPrototypeUrl ?? cs.highFidelityCtaUrl ?? "")}
+              openUrl={cs.highFidelityCtaUrl ?? cs.finalPrototypeUrl ?? ""}
+              title={`${cs.title} High-Fidelity Figma prototype`}
+              label="Load hi-fi prototype"
+              aspect="16/10"
+            />
             {cs.finalPrototypeUrl || cs.highFidelityCtaUrl ? (
               <a
                 href={cs.highFidelityCtaUrl ?? cs.finalPrototypeUrl}
