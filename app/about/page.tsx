@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export default function AboutPage() {
-  const aboutProfileImage = "/images/about.jpg";
+  const aboutProfileImage = "/images/about.png";
 
   return (
     <article className="space-y-10">
@@ -11,10 +11,10 @@ export default function AboutPage() {
           {aboutProfileImage ? (
             <Image
               src={aboutProfileImage}
-              alt="Profile picture"
+              alt="Portrait, smiling, striped shirt, seated in a brown chair against a neutral textured wall"
               fill
-              sizes="(max-width: 640px) 100vw, 340px"
-              className="object-cover"
+              sizes="(max-width: 640px) 100vw, 400px"
+              className="origin-center scale-[1.06] object-cover object-center"
               priority
             />
           ) : (
@@ -84,7 +84,7 @@ export default function AboutPage() {
           </li>
         </ul>
         <a
-          href="https://drive.google.com/file/d/1EZM08eVmfao7VF_5HlMblsioipxTRwlT/view?usp=drive_link"
+          href="https://drive.google.com/file/d/1vfiwDxfMezvEQljHFsaTNSjKdPJtvARz/view?usp=sharing"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center rounded-full border border-accent px-5 py-2 font-sans text-[13px] font-medium uppercase tracking-[0.08em] text-accent transition-colors duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:bg-accent hover:text-white"
