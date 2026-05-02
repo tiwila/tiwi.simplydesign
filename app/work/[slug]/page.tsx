@@ -109,8 +109,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         {cs.heroImage ? (
           <div className="relative w-full overflow-hidden rounded-sm bg-bg">
             <div className="relative aspect-[16/8]">
-              <Image src={cs.heroImage} alt={`${cs.title} hero`} fill className="object-cover" />
-              <div className="absolute inset-0 bg-ink/35" aria-hidden="true" />
+              <Image src={cs.heroImage} alt={`${cs.title} hero`} fill className="object-contain p-2" />
             </div>
           </div>
         ) : null}
@@ -428,6 +427,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </header>
 
+        {cs.heroImage ? (
+          <div className="relative w-full overflow-hidden rounded-sm bg-bg">
+            <div className="relative aspect-[16/9]">
+              <Image src={cs.heroImage} alt={`${cs.title} hero`} fill className="object-contain p-2" />
+            </div>
+          </div>
+        ) : null}
         <hr />
 
         <CaseStudyContext role={cs.role} context={cs.context} timeline={cs.timeline} brief={cs.brief} />
@@ -469,7 +475,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <p>{cs.phase2Body}</p>
 
           <figure className="my-6 space-y-2">
-            <div className="relative w-full overflow-hidden rounded-sm border border-hairline border-rule bg-bg">
+            <div className="relative w-full overflow-hidden rounded-sm bg-bg">
               <div className="relative aspect-[16/9]">
                 <Image
                   src="https://tiwila.github.io/simplydivine.github.io/assets/morocanva.png"
@@ -495,7 +501,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <p>{cs.phase3Body}</p>
 
           <figure className="my-6 space-y-2">
-            <div className="relative w-full overflow-hidden rounded-sm border border-hairline border-rule bg-bg">
+            <div className="relative w-full overflow-hidden rounded-sm bg-bg">
               <div className="relative aspect-[16/9]">
                 <Image
                   src="https://tiwila.github.io/simplydivine.github.io/assets/morofinal.png"
@@ -588,9 +594,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         ) : null}
       </header>
       {cs.heroImage ? (
-        <div className="relative w-full overflow-hidden rounded-sm">
+        <div className="relative w-full overflow-hidden rounded-sm bg-bg">
           <div className="relative aspect-[16/9]">
-            <Image src={cs.heroImage} alt={`${cs.title} hero`} fill className="object-cover" unoptimized />
+            <Image src={cs.heroImage} alt={`${cs.title} hero`} fill className="object-contain p-2" unoptimized />
           </div>
         </div>
       ) : null}
@@ -623,7 +629,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             guided decision support.
           </p>
           <figure className="space-y-2">
-            <div className="relative w-full overflow-hidden rounded-sm border border-rule bg-bg">
+            <div className="relative w-full overflow-hidden rounded-sm bg-bg">
               <div className="relative aspect-[16/9]">
                 <Image src={cs.userJourneyImage} alt="User journey map" fill className="object-contain" unoptimized />
               </div>
@@ -651,7 +657,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               {isMosm && idx === 0 ? (
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
                   <figure className="space-y-2">
-                    <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                    <div className="relative overflow-hidden rounded-sm bg-bg">
                       <div className="relative aspect-[16/10]">
                         <Image
                           src="/images/mosm-brand-positioning.png"
@@ -667,7 +673,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   </figure>
 
                   <figure className="space-y-2">
-                    <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                    <div className="relative overflow-hidden rounded-sm bg-bg">
                       <div className="relative aspect-[16/10]">
                         <Image
                           src="/images/mosm-brand-pillars.png"
@@ -686,7 +692,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
               {isMosm && idx === 1 ? (
                 <figure className="mt-5 space-y-2">
-                  <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                  <div className="relative overflow-hidden rounded-sm bg-bg">
                     <div className="relative aspect-[16/9]">
                       <Image
                         src="/images/mosm-logo-concepts.png"
@@ -729,7 +735,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
           {cs.usabilityFindingsImage ? (
             <figure className="space-y-2">
-              <div className="relative w-full overflow-hidden rounded-sm border border-rule bg-bg">
+              <div className="relative w-full overflow-hidden rounded-sm bg-bg">
                 <div className="relative aspect-[16/8]">
                   <Image src={cs.usabilityFindingsImage} alt="Usability study findings" fill className="object-contain" unoptimized />
                 </div>
@@ -747,7 +753,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <div className="grid gap-4 md:grid-cols-2">
                 {cs.usabilityBeforeImage ? (
                   <figure className="space-y-2">
-                    <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                    <div className="relative overflow-hidden rounded-sm bg-bg">
                       <div className="relative aspect-[16/10]">
                         <Image src={cs.usabilityBeforeImage} alt="Before usability testing" fill className="object-contain p-2" unoptimized />
                       </div>
@@ -759,7 +765,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 ) : null}
                 {cs.usabilityAfterImage ? (
                   <figure className="space-y-2">
-                    <div className="relative overflow-hidden rounded-sm border border-rule bg-bg">
+                    <div className="relative overflow-hidden rounded-sm bg-bg">
                       <div className="relative aspect-[16/10]">
                         <Image src={cs.usabilityAfterImage} alt="After usability testing" fill className="object-contain p-2" unoptimized />
                       </div>
@@ -1053,7 +1059,7 @@ function LabeledFigmaEmbed({ label, figmaUrl, title }: { label: string; figmaUrl
       <div className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-ink-muted">
         {label}
       </div>
-      <div className="relative w-full overflow-hidden rounded-sm border border-hairline border-rule bg-bg">
+      <div className="relative w-full overflow-hidden rounded-sm bg-bg">
         <div className="aspect-[16/9] w-full">
           <iframe
             src={toFigmaEmbedUrl(figmaUrl)}

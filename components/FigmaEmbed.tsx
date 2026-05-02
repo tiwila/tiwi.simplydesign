@@ -51,7 +51,7 @@ export function FigmaEmbed({
 
   return (
     <figure className="space-y-2">
-      <div className="relative w-full overflow-hidden rounded-sm border border-rule bg-bg" ref={containerRef}>
+      <div className="relative w-full overflow-hidden rounded-sm bg-bg" ref={containerRef}>
         <div className={`${aspectClass(aspect)} w-full`}>
           {shouldLoad ? (
             <iframe
