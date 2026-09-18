@@ -3,48 +3,17 @@ title: "TalksAI"
 description: "Evolving a hackathon MVP into a trustworthy AI financial decision-making experience."
 role: "Product Designer"
 context: "AI financial assistant for small business owners — auto repair shops"
-timeline: "Hackathon MVP + design pass · 2025"
-brief: "Help shop owners answer one high-stakes question: Can I afford to do this right now?"
+timeline: "Hackathon MVP + design pass · 2026"
+sortDate: "2026-09-17"
+brief: "Help shop owners answer one question — Can I afford to do this right now?"
 tags: ["Product Design", "AI", "UX Research", "Accessibility"]
 toolStack: ["Figma", "React", "Vite", "Tailwind", "Able"]
+coverImage: "/images/talksai-dashboard.jpg"
+heroImage: "/images/talksai-dashboard-hero.gif"
 featured: true
 relatedSlug: "moro-app-redesign"
 hoverTeaser: "the one where AI advice had to earn trust"
-accentColor: "warm-yellow"
-metrics:
-  - value: "Top 10"
-    label: "hackathon finalist"
-  - value: "2"
-    label: "priority flows redesigned"
-  - value: "19.9:1"
-    label: "overall contrast ratio"
+accentColor: "mint"
 ---
 
-## The Problem
-
-TalksAI is an AI-powered financial decision assistant for small business owners — auto repair shop owners specifically — who face high-stakes weekly decisions (inventory, hiring, pricing) without visibility into the only question that matters: “Can I afford to do this right now?”
-
-The product started as a 48-hour hackathon build (Top 10 Finalist, Triibe Black Youth AI Hackathon). The MVP already had a shared forecast across Dashboard, AI Assistant, and Growth Simulator, natural-language questions grounded in payroll and costs, and an early push toward proactive guidance — but it lacked a deliberate information hierarchy, visible reasoning behind AI recommendations, and any validation with the people it was meant for.
-
-## The Why Moment
-
-Speed got a working demo shipped. Trust is what the next pass had to earn. The turning point was treating the post-hackathon work as a real product design problem — research synthesis, information hierarchy, an explainability layer for AI advice, accessibility review, and lightweight usability testing — instead of another visual polish on the MVP.
-
-## What I Did
-
-### Scoping hard, then fixing duplicated recommendations
-I audited every screen as Keep, Redesign, Add, Test, or Remove, then descoped empty screens and the Growth Simulator so depth wasn’t spread thin. On the Dashboard, Daily Brief and Best Next Actions had been repeating the same three recommendations. I gave them different jobs: Daily Brief became the day’s narrative “why,” and Best Next Actions became three distinct items across today / this week / this month, each with a concrete action.
-
-### Making AI numbers explainable
-Safe-to-Spend and other calculated metrics were shown as conclusions with no path to how they were reached — the core trust failure in high-stakes AI finance. I added a collapsible “Why this answer?” layer on the AI Assistant, split into “From your setup” (onboarding values) and “Calculated from your data” (an explicit trail like cash − payroll − safety floor), plus a projected before/after impact of the recommended action. Setup values stayed display-only in this pass to protect timeline.
-
-### Cards that earn their place — by decision priority
-Before adding dashboard density, I tested each proposed card against what already existed. Payment History was cut because backward-looking reconciliation duplicated bank-feed behavior and contradicted TalksAI’s “show the future, not the past” differentiation. Remaining cards were organized by decision priority — Top (Cash Balance, Safe-to-Spend, Runway), Mid (Daily Brief, Best Next Actions, Upcoming Bills), Low (Pending Invoices, Upcoming Expenses) — communicated through visual weight and position, not labeled sections.
-
-## What Broke
-
-Growth Simulator shared the same forecast model but was deliberately descoped so Financial Overview and AI Decision Assistant could go deep — a Should-Have held for the next iteration. Accessibility was a lightweight Able-assisted review (strong overall contrast; mint-green links corrected as an AA risk), not a full assistive-technology audit. User testing was a small unmoderated Figma prototype study aimed at whether “Why this answer?” changed trust; findings are still being collected, and a stronger next step is moderated sessions with real shop owners.
-
-## The Outcome
-
-The design pass turned a speed-built MVP into a clearer, more trustworthy decision product: recommendations with distinct jobs, AI outputs with a visible reasoning trail, and a dashboard ordered by what owners need to decide first. The work shows information hierarchy under real constraints, AI explainability as a design problem (separating user-provided facts from calculated outputs), and product judgment — cutting Payment History and an entire flow with stated reasoning rather than silent scope creep. Next: redesign the Growth Simulator with the same explainability pattern, make setup values editable from the reasoning layer, run moderated sessions with shop owners, and complete a full accessibility audit once built in code.
+The TalksAI case study body is rendered in `components/TalksAICaseStudyBody.tsx`.

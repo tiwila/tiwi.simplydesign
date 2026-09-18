@@ -8,6 +8,7 @@ import { CaseStudySection } from "@/components/CaseStudySection";
 import { PullQuote } from "@/components/PullQuote";
 import { WhyMoment } from "@/components/WhyMoment";
 import { FigmaEmbed } from "@/components/FigmaEmbed";
+import { TalksAICaseStudyBody, TalksAIHero } from "@/components/TalksAICaseStudyBody";
 import { getAllCaseStudies, getCaseStudy } from "@/lib/work";
 
 export async function generateStaticParams() {
@@ -26,6 +27,13 @@ export async function generateMetadata({
     return {
       title: "Moro App — Tiwi Lanre-Adisa",
       description: "A three-stage journey bridging the gap between design freedom and technical performance."
+    };
+  }
+
+  if (slug === "talksai-financial-decision-assistant") {
+    return {
+      title: "TalksAI — Tiwi Lanre-Adisa",
+      description: "Evolving a hackathon MVP into a trustworthy AI financial decision-making experience."
     };
   }
 
@@ -538,6 +546,77 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <div />
           )}
           <Link href="/work" className={`font-sans text-[11px] font-medium uppercase tracking-[0.1em] ${ctaTextClass}`}>
+            All work →
+          </Link>
+        </div>
+      </article>
+    );
+  }
+
+  if (cs.slug === "talksai-financial-decision-assistant") {
+    const mintLinkClass = "text-[var(--talksai-mint-ink)]";
+
+    return (
+      <article className="talksai-page space-y-12">
+        <div>
+          <Link href="/work" className="font-sans text-[13px] font-medium text-ink-muted hover:text-ink">
+            ← Work
+          </Link>
+        </div>
+
+        <header className="space-y-3">
+          <h1 className={`font-serif text-[48px] font-bold leading-[1.08] ${headerTextClass}`}>{cs.title}</h1>
+          <div className="font-serif text-[20px] italic leading-[1.4] text-ink-muted">{cs.description}</div>
+          {cs.toolStack?.length ? (
+            <div className="flex flex-wrap gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+              {cs.toolStack.map((tool) => (
+                <span
+                  key={tool}
+                  className="rounded-sm border border-rule bg-cream-deep/35 px-2 py-1 text-ink-muted"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+          ) : null}
+          <div
+            className={`flex flex-wrap items-baseline gap-x-2 gap-y-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] ${mintLinkClass}`}
+          >
+            {cs.tags.map((tag, idx) => (
+              <span key={tag} className="inline-flex items-center gap-2">
+                <span>{tag}</span>
+                {idx < cs.tags.length - 1 ? <span className="text-ink-muted">·</span> : null}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        <TalksAIHero />
+
+        <CaseStudyContext role={cs.role} context={cs.context} timeline={cs.timeline} brief={cs.brief} />
+
+        <TalksAICaseStudyBody />
+
+        <hr />
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          {related ? (
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
+              <span>See also:</span>
+              <Link
+                href={`/work/${related.slug}`}
+                className={`${mintLinkClass} underline decoration-dotted underline-offset-[3px]`}
+                style={{ textDecorationThickness: "0.5px" }}
+              >
+                {related.title}
+              </Link>
+            </div>
+          ) : (
+            <div />
+          )}
+          <Link
+            href="/work"
+            className={`font-sans text-[11px] font-medium uppercase tracking-[0.1em] ${mintLinkClass}`}
+          >
             All work →
           </Link>
         </div>

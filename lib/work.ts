@@ -30,6 +30,7 @@ export type CaseStudy = {
   sections: CaseStudySectionMap;
   decisions: Array<{ label: string; body: string }>;
   year: string;
+  sortDate?: string;
   disciplines: string[];
   summary: string;
   coverImage?: string;
@@ -38,7 +39,7 @@ export type CaseStudy = {
   metrics?: Array<{ value: string; label: string }>;
   images?: Array<{ src: string; alt: string }>;
   hoverTeaser?: string;
-  accentColor?: "terracotta" | "sage" | "warm-yellow" | "default";
+  accentColor?: "terracotta" | "sage" | "warm-yellow" | "mint" | "default";
   prototypeUrl?: string;
   lofiPrototypeUrl?: string;
   finalPrototypeUrl?: string;
@@ -112,7 +113,16 @@ export async function getAllCaseStudies(): Promise<CaseStudy[]> {
     })
   );
 
-  return studies.sort((a, b) => Number(b.year) - Number(a.year));
+  return studies.sort((a, b) => studySortValue(b) - studySortValue(a));
+}
+
+function studySortValue(cs: CaseStudy) {
+  if (cs.sortDate) {
+    const parsed = Date.parse(cs.sortDate);
+    if (!Number.isNaN(parsed)) return parsed;
+  }
+  if (cs.year) return Date.parse(`${cs.year}-01-01`);
+  return 0;
 }
 
 export async function getCaseStudy(slug: string): Promise<CaseStudy> {
@@ -151,6 +161,7 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy> {
     sections,
     decisions: parseDecisions(sections.whatIDid),
     year: yearMatch ? yearMatch[1] : "",
+    sortDate: typeof data.sortDate === "string" && data.sortDate.trim().length > 0 ? data.sortDate : undefined,
     disciplines: tags,
     summary: String(data.description ?? ""),
     coverImage: typeof data.coverImage === "string" ? data.coverImage : undefined,
@@ -208,6 +219,7 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy> {
       data.accentColor === "terracotta" ||
       data.accentColor === "sage" ||
       data.accentColor === "warm-yellow" ||
+      data.accentColor === "mint" ||
       data.accentColor === "default"
         ? data.accentColor
         : "default"

@@ -5,7 +5,7 @@ import { getAllCaseStudies } from "@/lib/work";
 
 export default async function HomePage() {
   const all = await getAllCaseStudies();
-  const featured = all.filter((c) => c.featured).slice(0, 3);
+  const featured = all.filter((c) => c.featured).slice(0, 4);
 
   return (
     <div className="space-y-[80px]">
@@ -39,4 +39,5 @@ export default async function HomePage() {
     </div>
   );
 }
+
 

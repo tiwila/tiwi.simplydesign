@@ -20,7 +20,9 @@ export function WorkIndexWithPreview({ studies }: { studies: CaseStudy[] }) {
                   ? "hover:text-sage"
                   : c.accentColor === "warm-yellow"
                     ? "hover:text-warm-yellow"
-                    : "hover:text-accent";
+                    : c.accentColor === "mint"
+                      ? "hover:text-[var(--talksai-mint-ink)]"
+                      : "hover:text-accent";
 
             const teaserTextClass =
               c.accentColor === "terracotta"
@@ -29,7 +31,9 @@ export function WorkIndexWithPreview({ studies }: { studies: CaseStudy[] }) {
                   ? "text-sage"
                   : c.accentColor === "warm-yellow"
                     ? "text-warm-yellow"
-                    : "text-accent-dark";
+                    : c.accentColor === "mint"
+                      ? "text-[var(--talksai-mint-ink)]"
+                      : "text-accent-dark";
 
             return (
           <li

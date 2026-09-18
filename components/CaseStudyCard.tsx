@@ -18,7 +18,7 @@ export function CaseStudyCard({
   disciplines: string[];
   coverImage?: string;
   hoverTeaser?: string;
-  accentColor?: "terracotta" | "sage" | "warm-yellow" | "default";
+  accentColor?: "terracotta" | "sage" | "warm-yellow" | "mint" | "default";
 }) {
   const accentHoverClass =
     accentColor === "terracotta"
@@ -27,7 +27,9 @@ export function CaseStudyCard({
         ? "hover:border-sage/60"
         : accentColor === "warm-yellow"
           ? "hover:border-warm-yellow/80"
-          : "hover:border-accent/55";
+          : accentColor === "mint"
+            ? "hover:border-[var(--talksai-mint)]/80"
+            : "hover:border-accent/55";
 
   const accentTextHoverClass =
     accentColor === "terracotta"
@@ -36,7 +38,9 @@ export function CaseStudyCard({
         ? "group-hover:text-sage"
         : accentColor === "warm-yellow"
           ? "group-hover:text-warm-yellow"
-          : "group-hover:text-accent";
+          : accentColor === "mint"
+            ? "group-hover:text-[var(--talksai-mint-ink)]"
+            : "group-hover:text-accent";
 
   const accentTeaserTextClass =
     accentColor === "terracotta"
@@ -45,7 +49,9 @@ export function CaseStudyCard({
         ? "text-sage"
         : accentColor === "warm-yellow"
           ? "text-warm-yellow"
-          : "text-accent-dark";
+          : accentColor === "mint"
+            ? "text-[var(--talksai-mint-ink)]"
+            : "text-accent-dark";
 
   return (
     <Link
@@ -61,6 +67,7 @@ export function CaseStudyCard({
                 alt={`${title} preview`}
                 fill
                 className="object-contain bg-bg p-2"
+                unoptimized={coverImage?.endsWith(".jpg") || coverImage?.endsWith(".jpeg")}
               />
             ) : (
               <div className="h-full w-full bg-accent-light/40" />
