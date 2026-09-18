@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export default function AboutPage() {
-  const aboutProfileImage = "/images/about.png";
+  const aboutProfileImage = "/images/about.jpg";
 
   return (
     <article className="space-y-10">
@@ -11,11 +11,12 @@ export default function AboutPage() {
           {aboutProfileImage ? (
             <Image
               src={aboutProfileImage}
-              alt="Portrait, smiling, striped shirt, seated in a brown chair against a neutral textured wall"
+              alt="Portrait of Tiwi Lanre-Adisa in a black blazer"
               fill
               sizes="(max-width: 640px) 100vw, 400px"
-              className="origin-center scale-[1.06] object-cover object-center"
+              className="object-cover object-[center_18%]"
               priority
+              unoptimized
             />
           ) : (
             <div className="flex aspect-[4/5] items-center justify-center font-sans text-[12px] font-medium uppercase tracking-[0.08em] text-ink-muted">
