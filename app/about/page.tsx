@@ -41,13 +41,61 @@ export default function AboutPage() {
           <li className="font-sans text-[16px] leading-[1.7] text-ink">💃 Dancing &amp; Singing</li>
           <li className="font-sans text-[16px] leading-[1.7] text-ink">🎸 Strumming my Guitar</li>
           <li className="font-sans text-[16px] leading-[1.7] text-ink">📚 Lost in a Book</li>
-          <li className="font-sans text-[16px] leading-[1.7] text-ink">📺 Binging K-Dramas</li>
+          <li className="font-sans text-[16px] leading-[1.7] text-ink">📺 Binging K-Dramas and C-Dramas</li>
           <li className="font-sans text-[16px] leading-[1.7] text-ink">🙏 Reading my Bible</li>
+          <li className="font-sans text-[16px] leading-[1.7] text-ink">🧁 Baking</li>
         </ul>
         <p className="font-sans text-[16px] leading-[1.7] text-ink">
           <strong>Fun Fact:</strong> If you haven&apos;t guessed by now, my favorite color is Purple. I
           love how it balances creativity with a sense of luxury and depth.
         </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-serif text-[28px] leading-[1.2] text-ink">A new hobby: baking</h2>
+        <p className="font-sans text-[16px] leading-[1.7] text-ink">
+          Lately I&apos;ve been in the kitchen as much as Figma — testing recipes the same way I test
+          designs: iterate, taste, adjust. Here are a few recent bakes.
+        </p>
+        <div className="grid max-w-[420px] grid-cols-2 gap-3 sm:max-w-[520px] sm:grid-cols-4">
+          {[
+            {
+              src: "/images/about-blondies.jpg",
+              alt: "Chocolate chip blondies cut into squares",
+              caption: "Chocolate chip blondies"
+            },
+            {
+              src: "/images/about-chinchin.jpg",
+              alt: "A bowl of chin-chin, a Nigerian snack",
+              caption: "Chin-chin, a Nigerian snack",
+              object: "object-[center_72%]"
+            },
+            {
+              src: "/images/about-chai-muffins.jpg",
+              alt: "Vanilla muffins with cinnamon crumble topping in a muffin tin",
+              caption: "Vanilla muffin with cinnamon crumble topping"
+            },
+            {
+              src: "/images/about-vanilla-muffins.jpg",
+              alt: "Chai variation of the vanilla muffin with cinnamon crumble",
+              caption: "Chai variation of the vanilla muffin"
+            }
+          ].map((bake) => (
+            <figure key={bake.src} className="space-y-1.5">
+              <div className="relative aspect-square overflow-hidden rounded-lg border border-rule bg-accent-light/20">
+                <Image
+                  src={bake.src}
+                  alt={bake.alt}
+                  fill
+                  sizes="130px"
+                  className={`object-cover ${bake.object ?? "object-center"}`}
+                  unoptimized
+                />
+              </div>
+              <figcaption className="font-sans text-[11px] leading-snug italic text-ink-muted">{bake.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
       </section>
 
       <section className="space-y-4 rounded-xl border border-rule bg-cream-deep/45 p-5 sm:p-6">
