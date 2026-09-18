@@ -256,8 +256,10 @@ export function TalksAICaseStudyBody() {
           I ran a contrast and structural review across the redesigned Dashboard and AI Assistant
           screens using Stark, a Figma accessibility plugin. Overall contrast came in at 19.9:1, a
           strong pass. Body text (light gray captions) measured 4.83:1 — clears WCAG AA, just short of
-          AAA, flagged as a future refinement rather than a failure. The mint-green &ldquo;View
-          Details&rdquo; links on white backgrounds were a real risk and got fixed.
+          AAA, flagged as a future refinement rather than a failure. Several contrast issues came up —
+          mint-green links on white backgrounds, body text on the Current Runway card, and nav/logout
+          text against the dark sidebar among them — and got corrected. A couple of examples are shown
+          below.
         </p>
         <div className="grid gap-4 md:grid-cols-[1fr_200px] md:items-start">
           <figure className="space-y-2">
