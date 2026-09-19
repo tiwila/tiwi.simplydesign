@@ -567,6 +567,19 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <header className="space-y-3">
           <h1 className={`font-serif text-[48px] font-bold leading-[1.08] ${headerTextClass}`}>{cs.title}</h1>
           <div className="font-serif text-[20px] italic leading-[1.4] text-ink-muted">{cs.description}</div>
+          <p className="font-sans text-[15px] leading-[1.7] text-ink">
+            View the original TalksAI demo website{" "}
+            <a
+              href="https://talksai-phi.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className={`${mintLinkClass} underline decoration-dotted underline-offset-[3px]`}
+              style={{ textDecorationThickness: "0.5px" }}
+            >
+              here
+            </a>
+            .
+          </p>
           {cs.toolStack?.length ? (
             <div className="flex flex-wrap gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.1em] text-ink-muted">
               {cs.toolStack.map((tool) => (
