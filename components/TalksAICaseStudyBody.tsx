@@ -100,8 +100,7 @@ export function TalksAICaseStudyBody() {
           The original Dashboard said the same three things twice — once in a &ldquo;Daily
           Brief&rdquo; panel, again in &ldquo;Best Next Actions.&rdquo; I gave each panel a different
           job: Daily Brief now explains <em className="font-serif italic">today</em>, in plain
-          language. Best Next Actions gives three separate next steps — today, this week, this month —
-          each with its own button.
+          language. Best Next Actions gives three separate next steps, each with its own button.
         </p>
         <div className="mx-auto grid max-w-[680px] gap-4 md:grid-cols-2 md:items-start">
           <figure className="space-y-2">
@@ -191,15 +190,15 @@ export function TalksAICaseStudyBody() {
           does seeing the AI&apos;s reasoning actually make someone trust the recommendation more?
         </p>
         <p>
-          Both participants understood the recommendation correctly, and both said the reasoning layer
+          Participants understood the recommendation correctly, and said the reasoning layer
           increased their confidence — one specifically called out that seeing the safety floor and
           payroll numbers made the recommendation &ldquo;feel accurate,&rdquo; not just plausible.
         </p>
         <p>
-          They also converged, independently, on the same gap from two different angles: one
+          Participants also converged, independently, on the same gap from two different angles: some
           didn&apos;t know <em className="font-serif italic">where</em> the $3,000 figure came from,
-          the other wanted to know <em className="font-serif italic">how current</em> the numbers
-          were. That convergence was the clearest signal in the whole test — two people, unprompted,
+          others wanted to know <em className="font-serif italic">how current</em> the numbers
+          were. That convergence was the clearest signal in the whole test — participants, unprompted,
           pointing at the same missing piece of trust.
         </p>
         <p>
