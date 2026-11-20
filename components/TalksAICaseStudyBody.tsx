@@ -128,7 +128,7 @@ export function TalksAICaseStudyBody() {
               />
             </div>
             <figcaption className="font-sans text-[12px] italic text-ink-muted">
-              Best Next Actions — today, this week, this month
+              Best Next Actions, three separate next steps
             </figcaption>
           </figure>
         </div>
